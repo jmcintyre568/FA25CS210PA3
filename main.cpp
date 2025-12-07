@@ -1,6 +1,7 @@
 //
-// Created by Manju Muralidharan on 11/22/25.
-//
+// Jasper McIntyre
+// CS210 
+// 12/6/2025
 
 #include <iostream>
 #include <vector>
@@ -120,7 +121,67 @@ void printPath(pair<int,int> exitcell,
 // bool dfs(……) {
 //     // Your code here
 // }
+bool dfs(int r, int c,
+         const vector<vector<int>>& maze,
+         vector<vector<bool>>& visited,
+         vector<vector<int>>& parent_r,
+         vector<vector<int>>& parent_c,
+         int exit_r, int exit_c) {
 
+    int N = maze.size();
+    int M = maze[0].size();
+    //check for out of bounds
+    if ((r < 0) || (r >= N)) {
+        return false;
+    }
+    if ((c < 0) || (c >= M)) {
+        return false;
+    }
+
+    if (maze[r][c]==1) {
+        return false;
+    }
+    if (visited[r][c]== true) {
+        return false;
+    }
+    //if in bounds and [r][c] isnt a wall then mark rc as visited
+    visited[r][c]=true;
+// if exit has been found
+    if (r==exit_r && c==exit_c) {
+        return true;
+    }
+
+
+    for (int i=0; i<4;i++) {
+        int neighbor_r = r + dr[i];
+        int neighbor_c = c + dc[i];
+    //check if neighboring node is out of bounds
+        if (neighbor_r <0 || neighbor_r >=N || neighbor_c <0 || neighbor_c >= M || maze[neighbor_r][neighbor_c] == 1 ||  ) {
+            return false;
+        }
+         if (neighbor_c <0 || neighbor_c>=M) {
+            return false;
+        }
+         if (maze[neighbor_r][neighbor_c] == 1) {
+            return false;
+        }
+         if (visited[neighbor_r][neighbor_c]==false) {
+            return false;
+        }
+
+
+            visited[r][c] = true;
+        if (r==exit_r && c==exit_c) {
+            return true;
+        }
+
+
+
+    }
+
+
+
+};
 
 // ----------------------------------------------------------
 // MAIN PROGRAM (students add DFS calls and logic)
