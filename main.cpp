@@ -1,7 +1,6 @@
 //
-// Jasper McIntyre
-// CS210 
-// 12/6/2025
+// Created by Manju Muralidharan on 11/22/25.
+//
 
 #include <iostream>
 #include <vector>
@@ -156,28 +155,21 @@ bool dfs(int r, int c,
         int neighbor_r = r + dr[i];
         int neighbor_c = c + dc[i];
     //check if neighboring node is out of bounds
-        if (neighbor_r <0 || neighbor_r >=N || neighbor_c <0 || neighbor_c >= M || maze[neighbor_r][neighbor_c] == 1 ||  ) {
-            return false;
-        }
-         if (neighbor_c <0 || neighbor_c>=M) {
-            return false;
-        }
-         if (maze[neighbor_r][neighbor_c] == 1) {
-            return false;
-        }
-         if (visited[neighbor_r][neighbor_c]==false) {
-            return false;
+        if (neighbor_r <0 || neighbor_r >=N || neighbor_c <0 || neighbor_c >= M || maze[neighbor_r][neighbor_c] == 1 || visited[neighbor_r][neighbor_c]==true ) {
+            continue;
         }
 
+        parent_r[neighbor_r][neighbor_c] = r;
+        parent_c[neighbor_r][neighbor_c] = c;
 
-            visited[r][c] = true;
-        if (r==exit_r && c==exit_c) {
+        // recursive call on the neighbor
+        if (dfs(neighbor_r, neighbor_c, maze,visited, parent_r, parent_c, exit_r, exit_c)) {
             return true;
         }
 
-
-
     }
+    //if all neighbors have been checked and no exit is found
+    return false;
 
 
 
